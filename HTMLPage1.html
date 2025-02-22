@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Голосование: Я пойду в Among Us?</title>
+    <script>
+        let votes = {
+            "Пойду": 0,
+            "Не пойду": 0
+        };
+
+        let hasVoted = false; // Флаг для проверки, проголосовал ли пользователь
+
+        function vote(option) {
+            if (hasVoted) {
+                alert("Вы уже проголосовали!"); // Если голосовал, не даем проголосовать повторно
+                return;
+            }
+
+            // Увеличиваем количество голосов для выбранной опции
+            votes[option]++;
+            hasVoted = true; // Устанавливаем флаг, что пользователь проголосовал
+
+            // Обновляем результаты голосования на странице
+            updateResults();
+
+            // Отключаем кнопки голосования
+            document.getElementById("vote-yes").disabled = true;
+            document.getElementById("vote-no").disabled = true;
+        }
+
+        function updateResults() {
+            // Отображаем количество голосов для каждой опции
+            document.getElementById("result-Пойду").innerText = "Пойду: " + votes["Пойду"];
+            document.getElementById("result-НеПойду").innerText = "Не пойду: " + votes["Не пойду"];
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Голосование: Я пойду в Among Us?</h1>
+
+    <p>Проголосуй, пойдешь ли ты в игру:</p>
+
+    <button id="vote-yes" onclick="vote('Пойду')">Я пойду</button>
+    <button id="vote-no" onclick="vote('Не пойду')">Я не пойду</button>
+
+    <h2>Результаты голосования:</h2>
+    <ul>
+        <li id="result-Пойду">Пойду: 0</li>
+        <li id="result-НеПойду">Не пойду: 0</li>
+    </ul>
+
+</body>
+</html>
